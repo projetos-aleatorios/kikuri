@@ -5,6 +5,5 @@ export default function Instance(baseURL: string) {
         const prototype: iInstance = constructor.prototype;
         prototype.method = 'GET';
         prototype.baseURL = baseURL;
-        prototype.headers = {};
     }
 }

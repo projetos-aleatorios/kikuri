@@ -9,9 +9,10 @@ function Property({ original, descriptor, ...data }: iProperty): PropertyDescrip
         if (propertys.methods) method(this, propertys.methods);
         if (propertys.query) querys(this, propertys.query);
         if (propertys.params) params(this, propertys.params)
-        if (propertys.headers) headers(this, propertys.headers);
         if (propertys.body) body(this, args);
         if (propertys.response) await response(this, args);
+
+        console.log(this)
 
         return original.apply(this, args);
     };
@@ -34,11 +35,6 @@ function querys(instance: iInstance, { querys }: iQuery): iInstance {
 function params(instance: iInstance, { params }: iParams): iInstance {
     instance.param = params
     instance.fullURL = instance.fullURL + '' + instance.param;
-    return instance;
-}
-
-function headers(instance: iInstance, { headers }: iHeaders): iInstance {
-    instance.headers = headers;
     return instance;
 }
 
@@ -72,16 +68,11 @@ interface iParams {
     params: string
 }
 
-interface iHeaders {
-    headers: HeadersInit
-}
-
 interface Propertys {
     'methods'?: iMethod,
     'query'?: iQuery
     'params'?: iParams,
     'body'?: any,
-    'headers'?: iHeaders
     'response'?: any
 }
 

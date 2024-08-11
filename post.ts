@@ -5,14 +5,14 @@ import Response from "./decorators/kikuri/instance/response";
 import Body from './decorators/kikuri/instance/body';
 
 @Instance('https://dummyjson.com')
+@Headers({
+    'Content-Type': 'application/json',
+})
 class きくり {
 
     private response: any = {};
 
     @POST('/posts/add')
-    @Headers({
-        'Content-Type': 'application/json',
-    })
     @Body()
     @Response() public async dummyJson(body: {}): Promise<void> {
         console.log(this.response)

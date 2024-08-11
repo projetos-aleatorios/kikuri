@@ -1,15 +1,7 @@
-import Property from './Property';
+import type { iInstance } from '../interfaces/iInstance';
 
 export default function Headers(headers: HeadersInit) {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        Property.set({
-            original: descriptor.value, descriptor, 
-            propertys: {
-                headers: {
-                    headers
-                }
-            }
-        });
-        return descriptor;
+    return function (constructor: Function) {
+        constructor.prototype.headers = headers as iInstance;
     }
 };

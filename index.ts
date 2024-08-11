@@ -30,16 +30,16 @@ type FreeWeek = {
 
 
 @Instance('https://open-api.bser.io/v1')
+@Headers({
+    'Content-Type': 'application/json',
+    'x-api-key': Bun.env.TOKEN || '',
+})
 class きくり {
 
     private response: any = {};
 
     @GET('/user/nickname')
     @Query('query')
-    @Headers({
-        'Content-Type': 'application/json',
-        'x-api-key': Bun.env.TOKEN || '',
-    })
     @Response()
     public async playerName(nickname: string): Promise<Nickname> {
         const response: Nickname = this.response;
@@ -49,10 +49,6 @@ class きくり {
 
     @GET('/freeCharacters')
     @Param('/')
-    @Headers({
-        'Content-Type': 'application/json',
-        'x-api-key': Bun.env.TOKEN || '',
-    })
     @Response()
     public async freeWeek(matchingMode: matchingMode): Promise<FreeWeek> {
         const response: FreeWeek = this.response;
